@@ -22,4 +22,5 @@
         </c:forEach>
         </tbody>
     </table>
+    <util:paginationLink maxPages="${plpMaxPages}" entries="${phones}"/>
 </common:page>

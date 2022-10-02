@@ -1,3 +1,13 @@
 body {
     overflow-x: hidden;
 }
+
+.pdp-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.property-name {
+    font-weight:bold;
+}
