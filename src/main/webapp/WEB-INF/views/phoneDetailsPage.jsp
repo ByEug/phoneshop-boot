@@ -16,19 +16,19 @@
         <div>
             <table>
                 <tr>
-                    <td class="property-name"><spring:message code="pdp.brand"/></td>
+                    <td class="property-name"><spring:message code="pdp.brand.label"/></td>
                     <td><c:out value="${phone.brand}"/></td>
                 </tr>
                 <tr>
-                    <td class="property-name"><spring:message code="pdp.model"/></td>
+                    <td class="property-name"><spring:message code="pdp.model.label"/></td>
                     <td><c:out value="${phone.model}"/></td>
                 </tr>
                 <tr>
-                    <td class="property-name"><spring:message code="pdp.price"/></td>
+                    <td class="property-name"><spring:message code="pdp.price.label"/></td>
                     <td><c:out value="${phone.price}"/>&nbsp<spring:message code="pdp.currency"/></td>
                 </tr>
                 <tr>
-                    <td class="property-name"><spring:message code="pdp.description"/></td>
+                    <td class="property-name"><spring:message code="pdp.description.label"/></td>
                     <td><c:out value="${phone.description}"/></td>
                 </tr>
             </table>

@@ -11,3 +11,9 @@ body {
 .property-name {
     font-weight:bold;
 }
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: gray;
+}

@@ -1,36 +1,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ attribute name="maxPages" required="true" type="java.lang.Integer" %>
-<%@ attribute name="entries" required="true" type="org.springframework.data.domain.Page" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ attribute name="number" required="false" type="java.lang.Integer" %>
+<%@ attribute name="sortField" required="false" type="java.lang.String" %>
 
-<div>
-    <c:if test="${entries.hasPrevious()}">
-        <a href="/phones?page=${entries.previousOrFirstPageable()}"><<</a>
-    </c:if>
-
-    <c:choose>
-        <c:when test="${entries.totalPages <= maxPages}">
-            <c:set var="begin" value="0"/>
-            <c:set var="end" value="${entries.totalPages - 1}"/>
-        </c:when>
-        <c:when test="${entries.totalPages <= entries.number + maxPages / 2}">
-            <c:set var="begin" value="${entries.totalPages - maxPages}"/>
-            <c:set var="end" value="${entries.totalPages - 1}"/>
-        </c:when>
-        <c:when test="${entries.number - maxPages / 2 <= 0}">
-            <c:set var="begin" value="0"/>
-            <c:set var="end" value="${maxPages - 1}"/>
-        </c:when>
-        <c:otherwise>
-            <c:set var="begin" value="${entries.number - maxPages / 2 + maxPages % 2}"/>
-            <c:set var="end" value="${entries.number + maxPages / 2 + maxPages % 2 - 1}"/>
-        </c:otherwise>
-    </c:choose>
-    <c:forEach begin="${begin}"
-               end="${end}" step="1" var="pageNumber">
-        <a style="font-weight:${entries.number eq pageNumber ? 'bold' : ''}" href="/phones?page=${pageNumber}">${pageNumber + 1}</a>
+<c:url value="${pageContext.request.pathInfo}">
+    <c:forEach items="${param}" var="entry">
+        <c:if test="${entry.key ne 'page' and entry.key ne 'sort'}">
+            <c:param name="${entry.key}" value="${entry.value}" />
+        </c:if>
     </c:forEach>
-
-    <c:if test="${entries.hasNext()}">
-        <a href="/phones?page=${entries.nextOrLastPageable()}">>></a>
-    </c:if>
-</div>
+    <c:choose>
+        <c:when test="${not empty number}">
+            <c:param name="page" value="${number}" />
+        </c:when>
+        <c:when test="${not empty param.page}">
+            <c:param name="page" value="${param.page}" />
+        </c:when>
+    </c:choose>
+    <c:choose>
+        <c:when test="${not empty sortField}">
+            <c:param name="sort" value="${sortField}" />
+        </c:when>
+        <c:when test="${not empty param.sort}">
+            <c:param name="sort" value="${param.sort}" />
+        </c:when>
+    </c:choose>
+</c:url>
