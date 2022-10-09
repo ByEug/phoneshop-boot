@@ -4,7 +4,6 @@ import com.expertsoft.phoneshop.facade.PhoneFacade;
 import com.expertsoft.phoneshop.persistence.form.PlpSearchForm;
 import com.expertsoft.phoneshop.properties.PhoneShopProperties;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +22,8 @@ public class PhoneListPageController {
 
     private static final String PHONE_LIST_PAGE = "phoneListPage";
     private static final String PHONES = "phones";
+    private static final String SEARCH_ERROR = "searchError";
+    private static final String SEARCH_ERROR_PROPERTY_NAME = "plp.search.error.message";
     private static final String PLP_MAX_PAGES = "plpMaxPages";
     private static final String PLP_SEARCH_FORM = "plpSearchForm";
 
@@ -43,7 +44,7 @@ public class PhoneListPageController {
     public String searchPhones(Pageable pageable, @Valid @ModelAttribute PlpSearchForm plpSearchForm,
                                BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "redirect:" + PHONES_PATH;
+            return emptyResultWithSearchError(plpSearchForm, model);
         }
         model.addAttribute(PLP_SEARCH_FORM, plpSearchForm);
         model.addAttribute(PHONES, phoneFacade.searchByQueryAndPriceRange(plpSearchForm, pageable));
@@ -54,5 +55,12 @@ public class PhoneListPageController {
     @ModelAttribute
     public void addPlpMaxPagesAttribute(Model model) {
         model.addAttribute(PLP_MAX_PAGES, phoneShopProperties.getPlpMaxPages());
+    }
+
+    private String emptyResultWithSearchError(PlpSearchForm plpSearchForm, Model model) {
+        model.addAttribute(PLP_SEARCH_FORM, plpSearchForm);
+        model.addAttribute(SEARCH_ERROR, SEARCH_ERROR_PROPERTY_NAME);
+
+        return PHONE_LIST_PAGE;
     }
 }

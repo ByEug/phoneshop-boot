@@ -9,11 +9,21 @@ body {
 }
 
 .property-name {
-    font-weight:bold;
+    font-weight: bold;
+    vertical-align: top;
+    padding-right: 10px;
+}
+
+.pdp-description {
+    width: 600px;
 }
 
 a.disabled {
     pointer-events: none;
     cursor: default;
     color: gray;
+}
+
+.error-span {
+    color: red;
 }

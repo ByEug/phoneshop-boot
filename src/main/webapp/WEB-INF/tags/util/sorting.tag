@@ -7,9 +7,9 @@
 <c:set var="downArrow" value="&#x25BC;"/>
 <c:set var="ascending" value=",asc"/>
 <c:set var="descending" value=",desc"/>
-<a href="<util:paginationLink sortField="${sortedField}${ascending}"/>" class="<c:if test="${currentSortedField eq sortedField.concat(ascending)}">disabled</c:if>">
+<a href="<util:link sortField="${sortedField}${ascending}"/>" class="<c:if test="${currentSortedField eq sortedField.concat(ascending)}">disabled</c:if>">
     <c:out value="${upperArrow}" escapeXml="false"/>
 </a>
-<a href="<util:paginationLink sortField="${sortedField}${descending}"/>" class="<c:if test="${currentSortedField eq sortedField.concat(descending)}">disabled</c:if>">
+<a href="<util:link sortField="${sortedField}${descending}"/>" class="<c:if test="${currentSortedField eq sortedField.concat(descending)}">disabled</c:if>">
     <c:out value="${downArrow}" escapeXml="false"/>
 </a>

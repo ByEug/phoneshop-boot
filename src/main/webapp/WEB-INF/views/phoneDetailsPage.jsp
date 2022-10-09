@@ -29,7 +29,7 @@
                 </tr>
                 <tr>
                     <td class="property-name"><spring:message code="pdp.description.label"/></td>
-                    <td><c:out value="${phone.description}"/></td>
+                    <td class="pdp-description"><c:out value="${phone.description}"/></td>
                 </tr>
             </table>
         </div>

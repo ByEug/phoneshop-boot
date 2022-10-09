@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ attribute name="number" required="false" type="java.lang.Integer" %>
+<%@ attribute name="pageNumber" required="false" type="java.lang.Integer" %>
 <%@ attribute name="sortField" required="false" type="java.lang.String" %>
 
 <c:url value="${pageContext.request.pathInfo}">
@@ -10,8 +10,8 @@
         </c:if>
     </c:forEach>
     <c:choose>
-        <c:when test="${not empty number}">
-            <c:param name="page" value="${number}" />
+        <c:when test="${not empty pageNumber}">
+            <c:param name="page" value="${pageNumber}" />
         </c:when>
         <c:when test="${not empty param.page}">
             <c:param name="page" value="${param.page}" />
