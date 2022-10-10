@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/common" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <common:page pageTitle="Login" showMenu="false">
     <div class="row mb-3">
@@ -9,10 +11,10 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form method="post">
                         <div class="form-group row">
                             <label for="username" class="col-sm-3 col-form-label">
-                                Username:
+                                <spring:message code="login.page.username.label"/>
                             </label>
                             <div class="col-sm-8">
                                 <input type="text" id="username" name="username" class="form-control"/>
@@ -20,17 +22,30 @@
                         </div>
                         <div class="form-group row">
                             <label for="password" class="col-sm-3 col-form-label">
-                                Password:
+                                <spring:message code="login.page.password.label"/>
                             </label>
                             <div class="col-sm-8">
                                 <input type="password" id="password" name="password" class="form-control"/>
                             </div>
                         </div>
+                        <sec:csrfInput />
+                        <c:if test="${param.error eq true}">
+                            <div>
+                                <span class="error-span">
+                                    <spring:message code="login.page.error.message"/>
+                                </span>
+                            </div>
+                        </c:if>
                         <div class="row justify-content-center">
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="submit" class="btn btn-primary">
+                                <spring:message code="login.page.login.button.label"/>
+                            </button>
                         </div>
                         <div class="row justify-content-center">
-                            Login via GitHub >>
+                            <spring:message code="login.page.oauth2.login.via.label"/>&nbsp
+                            <a href="/oauth2/authorization/github">
+                                <spring:message code="login.page.oauth2.link.label"/>
+                            </a>
                         </div>
                     </form>
                 </div>
